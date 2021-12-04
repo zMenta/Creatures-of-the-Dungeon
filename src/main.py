@@ -10,6 +10,13 @@ def main():
 
     guy.attack(enemy)
     print(enemy.info())
+    print(enemy.is_dead())
+    guy.attack(enemy)
+    print(enemy.info())
+    print(enemy.is_dead())
+    guy.attack(enemy)
+    print(enemy.info())
+    print(enemy.is_dead())
 
 if __name__ == "__main__":
     main()

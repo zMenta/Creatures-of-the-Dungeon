@@ -39,4 +39,14 @@ class Creature:
         print(f"{self.name} Attacked {target.name} and dealt {self.attack_damage} damage!")
         
         
+    def is_dead(self) -> bool:
+        """
+        Returns true if creature has it's health <= 0, else returns false
+        """
+
+        if(self.health <= 0):
+            return True
+
+        if(not self.health <= 0):
+            return False
 
