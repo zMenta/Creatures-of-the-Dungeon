@@ -1,22 +1,13 @@
 
 from Creature import Creature
+from battle import battle
 
 def main():
-    guy = Creature(8,15, "player")
-    enemy = Creature(4,5,"enemy")
+    player = Creature(8,15, "player")
+    enemy = Creature(20,5,"enemy")
 
-    print(guy.info())
-    print(enemy.info())
-
-    guy.attack(enemy)
-    print(enemy.info())
-    print(enemy.is_dead())
-    guy.attack(enemy)
-    print(enemy.info())
-    print(enemy.is_dead())
-    guy.attack(enemy)
-    print(enemy.info())
-    print(enemy.is_dead())
+    while(player.is_alive() and enemy.is_alive()):
+        battle(player, enemy)
 
 if __name__ == "__main__":
     main()
