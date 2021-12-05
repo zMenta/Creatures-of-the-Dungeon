@@ -8,10 +8,7 @@ class Creature:
         self.name = name
         self.strength = strength
         self.vitality = vitality
-
         self.health = round(vitality*3)
-        self.attack_damage = round(strength*1.5)
-
 
     def info(self) -> dict:
         """
@@ -23,8 +20,7 @@ class Creature:
             "name": self.name,
             "strength": self.strength,
             "vitality": self.vitality,
-            "health": self.health,
-            "attack_damage": self.attack_damage
+            "health": self.health
         }
         
         return info
@@ -34,9 +30,11 @@ class Creature:
         """
         Attacks the Creature in the paremeter.
         """
+        attack = round(self.strength*1.5)
+
         if(self.is_alive()):
-            target.health -= self.attack_damage
-            print(f"{self.name} Attacked {target.name} and dealt {self.attack_damage} damage!")
+            target.health -= attack
+            return (f"{self.name} Attacked {target.name} and dealt {attack} damage!")
         
         
     def is_dead(self) -> bool:
