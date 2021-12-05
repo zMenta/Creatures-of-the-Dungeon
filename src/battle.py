@@ -3,6 +3,8 @@ def battle(player, enemy):
     """
     Makes a battle until one creatures defeats another. The first Creature in the parameter attacks first.
 
+    Returns true if player won. Else returns false
+
     Args:
         player (Creature)
         enemy (Creature)
@@ -16,4 +18,5 @@ def battle(player, enemy):
 
         if(enemy.is_dead()):
             print(f"{player.name} defeated {enemy.name}")
+            return True
 
