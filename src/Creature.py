@@ -50,10 +50,10 @@ class Creature:
         Args:
             equipment (equipment)
         """
-        if equipment is Weapon:
+        if type(equipment) is Weapon:
             print("I'm a weapon!")
 
-        if equipment is Armor:
+        if type(equipment) is Armor:
             print("I'm an armor piece!")
         
         
