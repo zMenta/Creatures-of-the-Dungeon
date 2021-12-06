@@ -16,7 +16,7 @@ class Creature:
         self.health = round(vitality*3)
         self.attack_power = round(self.strength*1.5)
 
-        if not armor_slot:
+        if armor_slot:
             self.defense = armor_slot.defense
 
     def info(self) -> dict:
