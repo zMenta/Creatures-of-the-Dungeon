@@ -1,4 +1,7 @@
 
+from Equipment import Armor, Weapon
+
+
 class Creature:
     """
     Class of a Creature.
@@ -10,10 +13,11 @@ class Creature:
         self.vitality = vitality
         self.armor_slot = armor_slot
         self.weapon_slot = weapon_slot
-
-        # self.defense = 
         self.health = round(vitality*3)
         self.attack_power = round(self.strength*1.5)
+
+        if not armor_slot:
+            self.defense = armor_slot.defense
 
     def info(self) -> dict:
         """
@@ -39,6 +43,18 @@ class Creature:
         if(self.is_alive()):
             target.health -= self.attack_power
             return (f"{self.name} Attacked {target.name} and dealt {self.attack_power} damage!")
+
+    def equip(self, equipment) -> None:
+        """Equips a weapon or an armor into weapon_slot or armor_slot
+
+        Args:
+            equipment (equipment)
+        """
+        if equipment is Weapon:
+            print("I'm a weapon!")
+
+        if equipment is Armor:
+            print("I'm an armor piece!")
         
         
     def is_dead(self) -> bool:
