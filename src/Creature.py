@@ -15,6 +15,9 @@ class Creature:
         self.weapon_slot = weapon_slot
         self.health = round(vitality*3)
         self.attack_power = round(self.strength*1.5)
+        
+        if not armor_slot:
+            self.defense = 0
 
         if armor_slot:
             self.defense = armor_slot.defense
@@ -29,7 +32,11 @@ class Creature:
             "name": self.name,
             "strength": self.strength,
             "vitality": self.vitality,
-            "health": self.health
+            "health": self.health,
+            "attack_power": self.attack_power,
+            "defense": self.defense,
+            "armor_slot": self.armor_slot.name if self.armor_slot else self.armor_slot,
+            "weapon_slot": self.weapon_slot.name if self.weapon_slot else self.weapon_slot
         }
         
         return info
@@ -39,10 +46,16 @@ class Creature:
         """
         Attacks the Creature in the paremeter.
         """
-        
+        if self.weapon_slot:
+            attack_damage = self.attack_power + self.weapon_slot.damage
+
+        if not self.weapon_slot:
+            attack_damage = self.attack_power
+
         if(self.is_alive()):
-            target.health -= self.attack_power
-            return (f"{self.name} Attacked {target.name} and dealt {self.attack_power} damage!")
+            damage_dealt = attack_damage - self.defense
+            target.health -= damage_dealt
+            return (f"{self.name} Attacked {target.name} and dealt {damage_dealt} damage!")
 
     def equip(self, equipment) -> None:
         """Equips a weapon or an armor into weapon_slot or armor_slot
@@ -51,11 +64,11 @@ class Creature:
             equipment (equipment)
         """
         if type(equipment) is Weapon:
-            print("I'm a weapon!")
+            self.weapon_slot = equipment
 
         if type(equipment) is Armor:
-            print("I'm an armor piece!")
-        
+            self.armor_slot = equipment
+            self.defense = equipment.defense
         
     def is_dead(self) -> bool:
         """

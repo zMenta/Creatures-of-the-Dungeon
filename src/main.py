@@ -1,6 +1,7 @@
 from random import randint
 
 from Creature import Creature
+from Equipment import Armor, Weapon
 from battle import battle
 from menu_options import options
 
