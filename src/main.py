@@ -10,11 +10,6 @@ def main():
     player = Creature("player",8,15)
     enemy = Creature(f"Enemy {creatures_defeated}",randint(0,6),randint(5,10))
 
-    # informação_do_jogador = player.info()
-
-    # print(informação_do_jogador)
-    # battle(player, enemy)
-
     while player.is_alive():
         print(options)
         choice = int(input("Type the option: "))
