@@ -4,11 +4,16 @@ class Creature:
     Class of a Creature.
     It initializes with strength,vitality and name attributes.
     """
-    def __init__(self, strength, vitality, name) -> None:
+    def __init__(self, name, strength, vitality, armor_slot = None, weapon_slot = None) -> None:
         self.name = name
         self.strength = strength
         self.vitality = vitality
+        self.armor_slot = armor_slot
+        self.weapon_slot = weapon_slot
+
+        # self.defense = 
         self.health = round(vitality*3)
+        self.attack_power = round(self.strength*1.5)
 
     def info(self) -> dict:
         """
@@ -30,11 +35,10 @@ class Creature:
         """
         Attacks the Creature in the paremeter.
         """
-        attack = round(self.strength*1.5)
-
+        
         if(self.is_alive()):
-            target.health -= attack
-            return (f"{self.name} Attacked {target.name} and dealt {attack} damage!")
+            target.health -= self.attack_power
+            return (f"{self.name} Attacked {target.name} and dealt {self.attack_power} damage!")
         
         
     def is_dead(self) -> bool:
