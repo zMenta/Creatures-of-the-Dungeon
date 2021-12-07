@@ -15,6 +15,7 @@ def battle(player, enemy):
         
         if(player.is_dead()):
             print(f"{enemy.name} defeated {player.name}")
+            return False
 
         if(enemy.is_dead()):
             print(f"{player.name} defeated {enemy.name}")

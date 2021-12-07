@@ -1,6 +1,7 @@
 from random import randint
 
 from Creature import Creature
+from Equipment import Armor, Weapon
 from battle import battle
 from menu_options import options
 
@@ -9,11 +10,6 @@ def main():
     creatures_defeated = 0
     player = Creature("player",8,15)
     enemy = Creature(f"Enemy {creatures_defeated}",randint(0,6),randint(5,10))
-
-    # informação_do_jogador = player.info()
-
-    # print(informação_do_jogador)
-    # battle(player, enemy)
 
     while player.is_alive():
         print(options)
