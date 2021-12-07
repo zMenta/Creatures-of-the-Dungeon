@@ -14,8 +14,13 @@ class Creature:
         self.armor_slot = armor_slot
         self.weapon_slot = weapon_slot
         self.health = round(vitality*3)
-        self.attack_power = round(self.strength*1.5)
-        
+
+        if not weapon_slot:
+            self.attack_power = round(self.strength*1.5)
+
+        if weapon_slot:
+            self.attack_power = round(self.strength*1.5) + self.weapon_slot.damage
+
         if not armor_slot:
             self.defense = 0
 
@@ -46,14 +51,10 @@ class Creature:
         """
         Attacks the Creature in the paremeter.
         """
-        if self.weapon_slot:
-            attack_damage = self.attack_power + self.weapon_slot.damage
-
-        if not self.weapon_slot:
-            attack_damage = self.attack_power
+        attack_damage = self.attack_power
 
         if(self.is_alive()):
-            damage_dealt = attack_damage - self.defense
+            damage_dealt = attack_damage - target.defense
             target.health -= damage_dealt
             return (f"{self.name} Attacked {target.name} and dealt {damage_dealt} damage!")
 
@@ -65,6 +66,7 @@ class Creature:
         """
         if type(equipment) is Weapon:
             self.weapon_slot = equipment
+            self.attack_power = round(self.strength*1.5) + equipment.damage
 
         if type(equipment) is Armor:
             self.armor_slot = equipment
