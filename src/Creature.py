@@ -7,14 +7,14 @@ class Creature:
     Class of a Creature.
     It initializes with strength,vitality and name attributes.
     """
-    def __init__(self,name, strength, vitality,level=1,armor_slot = None, weapon_slot = None) -> None:
+    def __init__(self, name, strength, vitality,level=1,armor_slot = None, weapon_slot = None) -> None:
         self.name = name
         self.level = level
         self.strength = strength
         self.vitality = vitality
+        self.health = round(self.vitality*3)
         self.armor_slot = armor_slot
         self.weapon_slot = weapon_slot
-        self.health = round(self.vitality*3)
 
         if not weapon_slot:
             self.attack_power = round(self.strength*1.5)
@@ -34,17 +34,7 @@ class Creature:
         Returns:
             dict
         """
-        info = {
-            "name": self.name,
-            "strength": self.strength,
-            "vitality": self.vitality,
-            "health": self.health,
-            "attack_power": self.attack_power,
-            "defense": self.defense,
-            "armor_slot": self.armor_slot.name if self.armor_slot else self.armor_slot,
-            "weapon_slot": self.weapon_slot.name if self.weapon_slot else self.weapon_slot
-        }
-        
+        info = vars(self)
         return info
 
     def heal(self) -> None:
