@@ -16,16 +16,16 @@ class Creature:
         self.armor_slot = armor_slot
         self.weapon_slot = weapon_slot
 
-        if not weapon_slot:
+        if not self.weapon_slot:
             self.attack_power = round(self.strength*1.5)
 
-        if weapon_slot:
+        if self.weapon_slot:
             self.attack_power = round(self.strength*1.5) + self.weapon_slot.damage
 
-        if not armor_slot:
+        if not self.armor_slot:
             self.defense = 0
 
-        if armor_slot:
+        if self.armor_slot:
             self.defense = armor_slot.defense
 
     def info(self) -> dict:
@@ -36,12 +36,17 @@ class Creature:
         """
         info = vars(self)
         return info
-
-    def heal(self) -> None:
-        """
-        Regenerates the health to it's maximum value.
+    
+    def update(self) -> None:
+        """Updates the attack_power and restores health
         """
         self.health = round(self.vitality*3)
+
+        if not self.weapon_slot:
+            self.attack_power = round(self.strength*1.5)
+
+        if self.weapon_slot:
+            self.attack_power = round(self.strength*1.5) + self.weapon_slot.damage
 
     def attack(self, target) -> None:
         """

@@ -46,7 +46,7 @@ def main():
                         player.vitality += 1
 
                     player.level += 1
-                    player.heal()
+                    player.update()
                     print("You feel refreshed.")
                         
         print("-="*40)
