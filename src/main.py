@@ -27,7 +27,7 @@ def main():
             if(battle(player,enemy)):
                 creatures_defeated += 1
                 enemy = Creature(f"Enemy {creatures_defeated}",randint(3,5+creatures_defeated),randint(3,7+creatures_defeated))
-                loot = loot_drop(creatures_defeated)
+                loot = loot_drop(0.25,creatures_defeated)
 
                 if loot:
                     print(f"You got loot! {(vars(loot))}")
