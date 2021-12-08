@@ -1,3 +1,8 @@
+from random import choice
+from random import random
+from random import randint
+
+from Equipment import Armor, Weapon
 
 def battle(player, enemy):
     """
@@ -21,3 +26,14 @@ def battle(player, enemy):
             print(f"{player.name} defeated {enemy.name}")
             return True
 
+def loot_drop(modifier=0):
+    chance = random()
+    probability = 0.25
+    if chance <= probability:
+        weapon = Weapon("Weapon",randint(2+modifier,5+modifier))
+        armor = Armor("Armor",randint(1+modifier,4+modifier))
+        items = [weapon,armor]
+        return choice(items)
+
+    if not chance <= probability:
+        return False

@@ -2,8 +2,9 @@ from random import randint
 
 from Creature import Creature
 from Equipment import Armor, Weapon
-from battle import battle
-from menu_options import options
+from game_systems import battle
+from game_systems import loot_drop
+from data import options
 
 
 def main():
@@ -26,6 +27,15 @@ def main():
             if(battle(player,enemy)):
                 creatures_defeated += 1
                 enemy = Creature(f"Enemy {creatures_defeated}",randint(3,5+creatures_defeated),randint(3,7+creatures_defeated))
+                loot = loot_drop(creatures_defeated)
+
+                if loot:
+                    print(f"You got loot! {(vars(loot))}")
+                    print(f"Your gear: Armor {vars(player.armor_slot) if player.armor_slot else None} | Weapon {vars(player.weapon_slot) if player.weapon_slot else None}")
+                    choice = input("You want to equip this item? 1-to equip ")
+                    if choice == str(1):
+                        player.equip(loot)
+                
 
         print("-="*40)
 
