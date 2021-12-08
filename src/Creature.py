@@ -7,13 +7,14 @@ class Creature:
     Class of a Creature.
     It initializes with strength,vitality and name attributes.
     """
-    def __init__(self, name, strength, vitality, armor_slot = None, weapon_slot = None) -> None:
+    def __init__(self,name, strength, vitality,level=1,armor_slot = None, weapon_slot = None) -> None:
         self.name = name
+        self.level = level
         self.strength = strength
         self.vitality = vitality
         self.armor_slot = armor_slot
         self.weapon_slot = weapon_slot
-        self.health = round(vitality*3)
+        self.health = round(self.vitality*3)
 
         if not weapon_slot:
             self.attack_power = round(self.strength*1.5)
@@ -46,6 +47,11 @@ class Creature:
         
         return info
 
+    def heal(self) -> None:
+        """
+        Regenerates the health to it's maximum value.
+        """
+        self.health = round(self.vitality*3)
 
     def attack(self, target) -> None:
         """
