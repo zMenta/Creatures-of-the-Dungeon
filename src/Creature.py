@@ -53,6 +53,9 @@ class Creature:
         """
         attack_damage = self.attack_power
 
+        if attack_damage < 0:
+            attack_damage = 0
+
         if(self.is_alive()):
             damage_dealt = attack_damage - target.defense
             target.health -= damage_dealt
