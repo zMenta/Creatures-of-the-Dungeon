@@ -53,11 +53,12 @@ class Creature:
         """
         attack_damage = self.attack_power
 
-        if attack_damage < 0:
-            attack_damage = 0
-
         if(self.is_alive()):
             damage_dealt = attack_damage - target.defense
+            
+            if damage_dealt < 0:
+                damage_dealt = 0
+
             target.health -= damage_dealt
             return (f"{self.name} Attacked {target.name} and dealt {damage_dealt} damage!")
 
