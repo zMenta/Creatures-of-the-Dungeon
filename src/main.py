@@ -26,7 +26,7 @@ def main():
         if choice == 3:
             if(battle(player,enemy)):
                 creatures_defeated += 1
-                enemy = Creature(f"Enemy {creatures_defeated}",randint(3,5+creatures_defeated),randint(3,7+creatures_defeated))
+                enemy = Creature(f"Enemy {creatures_defeated+1}",randint(3,5+creatures_defeated),randint(3,7+creatures_defeated))
                 loot = loot_drop(0.25,creatures_defeated)
 
                 if loot:
@@ -35,8 +35,20 @@ def main():
                     choice = input("You want to equip this item? 1-to equip ")
                     if choice == str(1):
                         player.equip(loot)
-                
 
+                if creatures_defeated % 5 == 0:
+                    print("You increased in power! Which attribute you want to level up?")
+                    choice = input("1-Strength | 2-Vitality: ")
+                    
+                    if choice == str(1):
+                        player.strength += 1
+                    if choice == str(2):
+                        player.vitality += 1
+
+                    player.level += 1
+                    player.heal()
+                    print("You feel refreshed.")
+                        
         print("-="*40)
 
 
