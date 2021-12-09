@@ -7,24 +7,25 @@ class Creature:
     Class of a Creature.
     It initializes with strength,vitality and name attributes.
     """
-    def __init__(self, name, strength, vitality, armor_slot = None, weapon_slot = None) -> None:
+    def __init__(self, name, strength, vitality,level=1,armor_slot = None, weapon_slot = None) -> None:
         self.name = name
+        self.level = level
         self.strength = strength
         self.vitality = vitality
+        self.health = round(self.vitality*3)
         self.armor_slot = armor_slot
         self.weapon_slot = weapon_slot
-        self.health = round(vitality*3)
 
-        if not weapon_slot:
+        if not self.weapon_slot:
             self.attack_power = round(self.strength*1.5)
 
-        if weapon_slot:
+        if self.weapon_slot:
             self.attack_power = round(self.strength*1.5) + self.weapon_slot.damage
 
-        if not armor_slot:
+        if not self.armor_slot:
             self.defense = 0
 
-        if armor_slot:
+        if self.armor_slot:
             self.defense = armor_slot.defense
 
     def info(self) -> dict:
@@ -33,19 +34,19 @@ class Creature:
         Returns:
             dict
         """
-        info = {
-            "name": self.name,
-            "strength": self.strength,
-            "vitality": self.vitality,
-            "health": self.health,
-            "attack_power": self.attack_power,
-            "defense": self.defense,
-            "armor_slot": self.armor_slot.name if self.armor_slot else self.armor_slot,
-            "weapon_slot": self.weapon_slot.name if self.weapon_slot else self.weapon_slot
-        }
-        
+        info = vars(self)
         return info
+    
+    def update(self) -> None:
+        """Updates the attack_power and restores health
+        """
+        self.health = round(self.vitality*3)
 
+        if not self.weapon_slot:
+            self.attack_power = round(self.strength*1.5)
+
+        if self.weapon_slot:
+            self.attack_power = round(self.strength*1.5) + self.weapon_slot.damage
 
     def attack(self, target) -> None:
         """
@@ -53,11 +54,12 @@ class Creature:
         """
         attack_damage = self.attack_power
 
-        if attack_damage < 0:
-            attack_damage = 0
-
         if(self.is_alive()):
             damage_dealt = attack_damage - target.defense
+            
+            if damage_dealt < 0:
+                damage_dealt = 0
+
             target.health -= damage_dealt
             return (f"{self.name} Attacked {target.name} and dealt {damage_dealt} damage!")
 
